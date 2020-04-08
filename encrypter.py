@@ -1,12 +1,9 @@
-
-class Encrypter:
-    """Class to encrypt the data string"""
-
-    def __init__(self, data):
-        self.data = data
-
-    def encrypt(self):
-        print("todo")
+import gnupg
+import home
 
 
-
+def encrypt(plaintext, email):
+    gpg = gnupg.GPG(gnupghome=home.get_home())
+    ciphertext_object = gpg.encrypt(plaintext, email)
+    ciphertext_string = str(ciphertext_object)
+    return ciphertext_string

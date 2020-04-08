@@ -1,13 +1,15 @@
 import os
 import home
 import keygen
+import encrypter
+
+FIRSTRUN = True
 
 
 def initialize():
     """Function to initialize the needed parameters"""
     # Generate the home directory
     home.home_generate()
-    homedir = home.get_home()
 
     # Grab an email id and passphrase
     print("Enter an email ID: ")
@@ -16,8 +18,17 @@ def initialize():
     passphrase = input()
 
     # Generate the key with the data
-    key = keygen.generate_key(homedir, email, passphrase)
-    print(key)
+    keygen.generate_key(home.get_home(), email, passphrase)
 
 
-initialize()
+def encrypt():
+    email = 'test@test.com'
+    plaintext = 'Test string to encrypt'
+    ciphertext = encrypter.encrypt(plaintext, email)
+    print(ciphertext)
+
+
+if FIRSTRUN:
+    initialize()
+
+encrypt()
