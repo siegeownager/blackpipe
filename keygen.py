@@ -9,14 +9,11 @@ def generate_key(gpghome, email, passphrase):
     """Function to generate the key pair"""
     gpg = gnupg.GPG(gnupghome=gpghome)
     input_data = generate_key_input(gpg, email, passphrase)
-    logging.debug("before gen_key")
     gpg.gen_key(input_data)
-    logging.debug("after gen_key")
 
 def generate_key_input(gpg, email, passphrase):
     """Function to generate the input data object"""
     input_data = gpg.gen_key_input(name_email=email, passphrase=passphrase)
-    logging.debug("generate key input func")
     return input_data
 
 
