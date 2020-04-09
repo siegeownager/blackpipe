@@ -5,11 +5,13 @@ import sys
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
+
 def generate_key(gpghome, email, passphrase):
     """Function to generate the key pair"""
     gpg = gnupg.GPG(gnupghome=gpghome)
     input_data = generate_key_input(gpg, email, passphrase)
     gpg.gen_key(input_data)
+
 
 def generate_key_input(gpg, email, passphrase):
     """Function to generate the input data object"""
@@ -33,6 +35,9 @@ def export_key(gpg, key, passphrase):
     logging.debug("Successfully exported keys!")
 
 
-def list_keys(gpg):
+def list_keys(gpghome):
+    """This function will list the current gpg keys in the gpg home directory"""
+
+    gpg = gnupg.GPG(gnupghome=gpghome)
     public_keys = gpg.list_keys()
     print(public_keys)
