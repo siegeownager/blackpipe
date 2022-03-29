@@ -8,22 +8,21 @@ import decrypter
 import base64_handler
 
 
-def gen_key_pair():
+def initialize():
     """Function to initialize the needed parameters"""
     # Generate the home directory
     home.home_generate()
 
-    # Generate the key with the data
-    keygen.generate_key(home.get_home())
-
 
 def main():
+    initialize()
     print("Hello!")
 
     while True:
         print("What would you like to do?")
         print("1 - Generate a new personal key pair")
-        print("2 - View existing keys")
+        print("2 - View existing public keys")
+        print("3 - View existing private keys")
         print("9 - Exit")
 
         print("Enter number to select option (1-9): ", end=' ')
@@ -31,9 +30,11 @@ def main():
         selection = input()
 
         if selection == '1':
-            gen_key_pair()
+            keygen.generate_key(home.get_home())
         elif selection == '2':
-            keygen.list_keys()
+            keygen.list_public_keys(home.get_home())
+        elif selection == '3':
+            keygen.list_private_keys(home.get_home())
         else:
             sys.exit()
 

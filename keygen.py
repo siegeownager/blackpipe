@@ -2,7 +2,7 @@ import gnupg
 import logging
 import sys
 
-logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+# logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
@@ -39,9 +39,17 @@ def export_key(gpg, key, passphrase):
     logging.debug("Successfully exported keys!")
 
 
-def list_keys(gpghome):
-    """This function will list the current gpg keys in the gpg home directory"""
+def list_public_keys(gpghome):
+    """This function will list the current public gpg keys in the gpg home directory"""
 
     gpg = gnupg.GPG(gnupghome=gpghome)
     public_keys = gpg.list_keys()
     print(public_keys)
+
+
+def list_private_keys(gpghome):
+    """This function will list the current private gpg keys in the gpg home directory"""
+
+    gpg = gnupg.GPG(gnupghome=gpghome)
+    private_keys = gpg.list_keys(True)  # Passing True as parameter makes it return private keys
+    print(private_keys)
