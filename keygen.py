@@ -6,9 +6,13 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 logging.basicConfig(level=logging.ERROR, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
-def generate_key(gpghome, email, passphrase):
+def generate_key(gpghome):
     """Function to generate the key pair"""
     gpg = gnupg.GPG(gnupghome=gpghome)
+    print("Enter an email ID: ")
+    email = input()
+    print("Enter a passphrase: ")
+    passphrase = input()
     input_data = generate_key_input(gpg, email, passphrase)
     gpg.gen_key(input_data)
 
